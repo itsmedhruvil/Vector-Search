@@ -3,19 +3,15 @@ import requests
 import os
 from dotenv import load_dotenv
 
-# Load environment variables from .env file
 load_dotenv()
 
-# Get values from environment variables
 MONGO_URI = os.getenv("MONGO_URI")
 HF_TOKEN = os.getenv("HF_TOKEN")
 
-# Connect to MongoDB
 client = pymongo.MongoClient(MONGO_URI)
 db = client.sample_mflix
 collection = db.movies
 
-# Hugging Face API details
 embedding_url = "https://api-inference.huggingface.co/pipeline/feature-extraction/sentence-transformers/all-MiniLM-L6-v2"
 
 def generate_embedding(text: str) -> list[float]:
